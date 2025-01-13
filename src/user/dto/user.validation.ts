@@ -10,6 +10,8 @@ export const userZodSchmea = z.object({
     .number()
     .min(0, { message: 'Age cannot be negative' })
     .max(100, { message: 'Age must be at most 100' }),
+  password: z.string().optional(),
+  
 });
 
 
