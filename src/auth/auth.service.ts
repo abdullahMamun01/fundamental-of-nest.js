@@ -23,7 +23,6 @@ export class AuthService {
       throw new HttpException('Invalid password', HttpStatus.BAD_REQUEST);
     }
     const paylaod = { id: user.id, email: user.email ,role: user.roles};
-    console.log(paylaod)
     const token = this.jwtService.sign(paylaod);
     return {
         user,

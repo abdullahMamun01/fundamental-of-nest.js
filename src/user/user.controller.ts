@@ -19,12 +19,14 @@ import { AuthGuard } from 'src/auth/auth.guards';
 
 import { RolesGuard } from 'src/auth/RolesGuard ';
 import { Role, Roles } from 'src/auth/roles.decorator';
+import { Public } from 'src/decorator/public.decorator';
 ;
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @Roles(Role.Admin)
   @Get()
   findAllUsers(
     @Query()
@@ -40,7 +42,6 @@ export class UserController {
   }
 
   @Get('profile')
-  @UseGuards(AuthGuard)
   profile(@Request() req: any) {
     return req.user;
   }
@@ -55,9 +56,8 @@ export class UserController {
     return this.userService.createUser(payload);
   }
 
+  @Roles(Role.User)
   @Patch(':id')
-  @Roles(Role.Admin)
-  @UseGuards(AuthGuard,RolesGuard)
   updateUserById(
     @Param('id') id: number,
     @Body(new ZodValidationPipe(userZodSchmea.partial())) payload: any,

@@ -14,7 +14,15 @@ import { RolesGuard } from './auth/RolesGuard ';
   imports: [UserModule, ProfileModule, EmployeesModule, AuthModule],
   controllers: [AppController],
   providers: [
-    AppService
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
   ],
 })
 export class AppModule {}

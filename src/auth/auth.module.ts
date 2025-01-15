@@ -6,8 +6,8 @@ import { UserModule } from 'src/user/user.module';
 
 @Module({
   imports : [
-    UserModule
-    ,
+    
+  
     JwtModule.register({
       global: true,
       
