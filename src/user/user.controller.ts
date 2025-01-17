@@ -16,18 +16,25 @@ import { ZodValidationPipe } from 'src/ZodValidationPipe';
 import { UserDto, userZodSchmea } from './dto/user.validation';
 import { AuthGuard } from 'src/auth/auth.guards';
 
-
 import { RolesGuard } from 'src/auth/RolesGuard ';
 import { Role, Roles } from 'src/auth/roles.decorator';
 import { Public } from 'src/decorator/public.decorator';
-;
+import {
+  ApiOperation,
+  ApiParam,
+  ApiProperty,
+  ApiResponse,
+} from '@nestjs/swagger';
 
+import { UserSwagger } from './swagger/user.swagger';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Roles(Role.Admin)
+  @Public()
   @Get()
+  @UserSwagger.createUser()
+  @ApiResponse({ status: 404, description: 'User not found.' })
   findAllUsers(
     @Query()
     query: {
@@ -46,6 +53,8 @@ export class UserController {
     return req.user;
   }
 
+  @Public()
+  @UserSwagger.singleUser()
   @Get(':id')
   findUserById(@Param('id') id: number) {
     return this.userService.getUserById(Number(id));
