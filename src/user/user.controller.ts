@@ -60,6 +60,7 @@ export class UserController {
     return this.userService.getUserById(Number(id));
   }
 
+  @Public()
   @Post()
   createUser(@Body(new ZodValidationPipe(userZodSchmea)) payload: UserDto) {
     return this.userService.createUser(payload);
