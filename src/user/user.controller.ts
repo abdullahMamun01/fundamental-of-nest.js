@@ -36,16 +36,8 @@ export class UserController {
   @UserSwagger.createUser()
   @ApiResponse({ status: 404, description: 'User not found.' })
   findAllUsers(
-    @Query()
-    query: {
-      page: string;
-      limit: string;
-      age: string;
-      name: string;
-      email: string;
-    },
   ) {
-    return this.userService.getAllUsers(query);
+    return this.userService.getAllUsers();
   }
 
   @Get('profile')

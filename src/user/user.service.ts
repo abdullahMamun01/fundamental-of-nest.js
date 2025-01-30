@@ -9,7 +9,7 @@ export class UserService {
   private usersDB = users;
 
   constructor(private prisma: PrismaService) {}
-  async getAllUsers(quereis: any) {
+  async getAllUsers() {
     const users = await this.prisma.user.findMany();
 
     return users;

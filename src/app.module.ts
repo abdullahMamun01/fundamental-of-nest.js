@@ -11,10 +11,12 @@ import { AuthGuard } from './auth/auth.guards';
 import { RolesGuard } from './auth/RolesGuard ';
 import { PrismaService } from './prisma/prisma.service';
 import { PrismaModule } from './prisma/prisma.module';
+import { PostModule } from './post/post.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 
 @Module({
-  imports: [UserModule, ProfileModule, EmployeesModule, AuthModule, PrismaModule],
+  imports: [UserModule, ProfileModule, EmployeesModule, AuthModule, PrismaModule, PostModule, CloudinaryModule],
   controllers: [AppController],
   providers: [
     AppService,
